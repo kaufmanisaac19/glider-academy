@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GliderAcademy">
+<meta name="theme-color" content="#0d1117">
+<title>Glider Engineering Academy</title>
+<style>
+:root{
+  --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--card:#1c2128;
+  --blue:#2f81f7;--bd:rgba(47,129,247,0.15);
+  --teal:#3fb950;--td:rgba(63,185,80,0.12);
+  --amber:#d29922;--ad:rgba(210,153,34,0.12);
+  --coral:#f85149;--cd:rgba(248,81,73,0.12);
+  --purple:#a371f7;--pd:rgba(163,113,247,0.12);
+  --text:#e6edf3;--t2:#8b949e;--t3:#484f58;
+  --border:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.13);
+  --r:10px;--rs:6px;
+  --st:env(safe-area-inset-top,0px);
+  --sb:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow:hidden}
+body{display:flex;flex-direction:column}
+#hdr{padding:calc(var(--st) + 10px) 14px 10px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:52px}
+.hl{display:flex;align-items:center;gap:6px}
+#backbtn{display:none;background:none;border:none;color:var(--blue);font-size:15px;cursor:pointer;padding:4px 8px 4px 0;white-space:nowrap}
+.ht{font-size:16px;font-weight:600;color:var(--text)}
+.hs{font-size:11px;color:var(--t3);margin-top:1px}
+#xpp{font-size:12px;background:var(--bd);color:var(--blue);border:1px solid rgba(47,129,247,0.3);padding:3px 10px;border-radius:99px;font-weight:600;white-space:nowrap}
+#scrl{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--sb) + 62px)}
+#nav{position:fixed;bottom:0;left:0;right:0;padding-bottom:var(--sb);background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:100}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px;border:none;background:none;cursor:pointer;color:var(--t3);font-size:10px;font-weight:500;min-height:50px;transition:color .15s}
+.nb.on{color:var(--blue)}.ni{font-size:18px;line-height:1}
+.sc{display:none}.sc.on{display:block}
+.sl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);padding:14px 14px 7px}
+.bi{font-size:19px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:10px}
+.bt{font-size:15px;color:var(--t2);line-height:1.75;margin-bottom:10px}
+.bt strong{color:var(--text);font-weight:500}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin:0 12px 10px;overflow:hidden}
+.cp{padding:12px 14px}
+.co{border-left:3px solid var(--blue);background:var(--bd);border-radius:0 var(--rs) var(--rs) 0;padding:10px 12px;margin:10px 0;font-size:13px;color:var(--t2);line-height:1.7}
+.co strong{color:var(--text);font-weight:500}
+.co.g{border-left-color:var(--teal);background:var(--td)}
+.co.a{border-left-color:var(--amber);background:var(--ad)}
+.co.r{border-left-color:var(--coral);background:var(--cd)}
+.co.p{border-left-color:var(--purple);background:var(--pd)}
+.hero{padding:18px 14px 14px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.hero h1{font-size:22px;font-weight:700;margin-bottom:4px}
+.hero p{font-size:13px;color:var(--t2);line-height:1.55;margin-bottom:12px}
+.hsg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hsc{background:var(--bg3);border-radius:var(--rs);padding:10px 8px;text-align:center}
+.hsn{font-size:22px;font-weight:700;color:var(--blue)}.hsl{font-size:10px;color:var(--t3);margin-top:2px}
+.pb{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin:6px 0}
+.pbf{height:100%;background:var(--blue);border-radius:2px;transition:width .5s}
+.ll{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s}
+.ll:active{background:var(--bg3)}.ll:last-child{border-bottom:none}
+.ln{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.ld{background:var(--teal);color:#000}.lc{background:var(--blue);color:#fff}.lk{background:var(--bg3);color:var(--t3)}
+.li{flex:1;min-width:0}.lt{font-size:14px;font-weight:500;color:var(--text);margin-bottom:2px}.ls{font-size:12px;color:var(--t2)}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500;white-space:nowrap}
+.bd2{background:var(--td);color:var(--teal)}.bc2{background:var(--bd);color:var(--blue)}.bk{background:var(--bg3);color:var(--t3)}
+.lhdr{padding:16px 14px 14px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.ltag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;display:inline-block;margin-bottom:7px}
+.ltitle{font-size:20px;font-weight:700;margin-bottom:5px}
+.ldesc{font-size:13px;color:var(--t2);line-height:1.55}
+.lc-wrap{padding:14px}
+
+/* GUIDED NOTES inside lesson */
+.gnote-block{background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r);padding:14px;margin:12px 0}
+.gnote-title{font-size:12px;font-weight:600;color:var(--amber);letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.gnote-q{font-size:14px;color:var(--text);line-height:1.6;margin-bottom:8px}
+.gnote-q em{color:var(--t2);font-style:normal}
+.fill-input{background:var(--bg3);border:1px solid var(--b2);border-radius:var(--rs);padding:8px 10px;color:var(--text);font-size:14px;font-family:inherit;width:100%;outline:none;margin-bottom:8px;transition:border-color .15s}
+.fill-input:focus{border-color:var(--blue)}
+.fill-input.saved{border-color:rgba(63,185,80,0.4)}
+.gnote-hint{font-size:11px;color:var(--t3);margin-bottom:6px}
+.reveal-btn{font-size:12px;color:var(--blue);background:none;border:1px solid rgba(47,129,247,0.3);border-radius:99px;padding:3px 10px;cursor:pointer}
+.answer-text{font-size:13px;color:var(--teal);background:var(--td);border-radius:var(--rs);padding:8px 10px;margin-top:4px;display:none;line-height:1.6}
+
+/* QUIZ */
+.qblock{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin:10px 0}
+.qh{font-size:11px;color:var(--t3);font-weight:600;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.qtxt{font-size:14px;font-weight:500;color:var(--text);margin-bottom:10px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:7px}
+.qo{font-size:14px;padding:10px 12px;border:1px solid var(--b2);border-radius:var(--rs);background:transparent;color:var(--text);cursor:pointer;text-align:left;transition:background .1s}
+.qo:active{background:var(--bg3)}
+.qo.ok{background:var(--td);border-color:var(--teal);color:#3fb950}
+.qo.bad{background:var(--cd);border-color:var(--coral);color:#f85149}
+.qo.show{background:var(--td);border-color:var(--teal);color:#3fb950}
+.qfb{font-size:13px;color:var(--t2);margin-top:8px;line-height:1.6;display:none;padding:9px 10px;background:var(--bg3);border-radius:var(--rs)}
+.qfb.on{display:block}
+.fok{color:var(--teal);font-weight:600}.fbad{color:var(--coral);font-weight:600}
+.qdots{display:flex;gap:5px;margin:6px 14px 0}
+.qd{width:8px;height:8px;border-radius:50%;background:var(--bg3);cursor:pointer;transition:transform .1s}
+.qd:active{transform:scale(1.3)}.qd.r{background:var(--teal)}.qd.w{background:var(--coral)}.qd.curr{background:var(--blue)}
+.quiz-nav{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:0 2px}
+.qnav-btn{font-size:13px;padding:8px 14px;border-radius:var(--rs);border:1px solid var(--b2);background:transparent;color:var(--t2);cursor:pointer}
+.qnav-btn:disabled{opacity:0.3;cursor:default}
+.qnav-btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* SCORE */
+.score-s{text-align:center;padding:26px 16px}
+.scn{font-size:60px;font-weight:800;color:var(--text);line-height:1}
+.scp{font-size:14px;color:var(--t2);margin:4px 0 12px}
+.scm{font-size:17px;font-weight:600;margin-bottom:5px}
+.scs{font-size:14px;color:var(--t2);line-height:1.6;margin-bottom:20px}
+.btn-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.btn{font-size:14px;font-weight:500;padding:10px 18px;border-radius:var(--rs);border:1px solid var(--b2);background:transparent;color:var(--text);cursor:pointer}
+.btnp{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* MODELS */
+#mcv{width:100%;height:228px;border-radius:var(--r);border:1px solid var(--border);display:block;cursor:grab;touch-action:none;background:var(--bg3)}
+#mcv:active{cursor:grabbing}
+#aoac{width:100%;height:148px;border-radius:var(--rs);border:1px solid var(--border);display:block;background:var(--bg3)}
+.mbtns{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.mb{font-size:12px;padding:5px 11px;border-radius:99px;border:1px solid var(--b2);background:transparent;color:var(--t2);cursor:pointer}
+.mb.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* NOTES SCREEN */
+.nc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin:0 12px 10px;overflow:hidden}
+.nch{background:var(--bg3);padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+.nct{font-size:14px;font-weight:500}.ncl{font-size:11px;color:var(--t3)}
+.ncb{padding:10px 12px}
+.ni2{font-size:13px;color:var(--t2);line-height:1.65;padding:5px 0;border-bottom:1px solid var(--border)}
+.ni2:last-child{border-bottom:none}
+.user-ans{font-size:13px;color:var(--amber);line-height:1.5;padding:3px 0;font-style:italic}
+
+/* ROADMAP */
+.rmi{display:flex;gap:10px;padding:10px 14px;position:relative}
+.rml{position:absolute;left:22px;top:36px;bottom:-10px;width:2px;background:var(--border)}
+.rmd{width:16px;height:16px;border-radius:50%;flex-shrink:0;margin-top:3px;z-index:1}
+.rmp{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);margin-bottom:2px}
+.rmt{font-size:14px;font-weight:600;margin-bottom:3px}
+.rms{font-size:12px;color:var(--t2);line-height:1.5}
+.rmb{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500;margin-top:5px;display:inline-block}
+
+@keyframes xpup{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-28px)}}
+</style>
+</head>
+<body>
+<div id="hdr">
+  <div class="hl">
+    <button id="backbtn" onclick="goBack()">← Back</button>
+    <div><div class="ht" id="ht">✈ Glider Academy</div><div class="hs" id="hst">Fixed-wing engineering course</div></div>
+  </div>
+  <div id="xpp">0 XP</div>
+</div>
+
+<div id="scrl">
+
+<!-- HOME -->
+<div class="sc on" id="sc-home">
+  <div class="hero">
+    <h1>Your academy.</h1>
+    <p>Fixed-wing engineering from first principles to autonomous flight.</p>
+    <div class="hsg">
+      <div class="hsc"><div class="hsn" id="hd">3</div><div class="hsl">Done</div></div>
+      <div class="hsc"><div class="hsn" id="hxp">0</div><div class="hsl">XP</div></div>
+      <div class="hsc"><div class="hsn" id="hstr">0</div><div class="hsl">Streak</div></div>
+    </div>
+  </div>
+  <div class="sl">Continue</div>
+  <div class="card cp" style="cursor:pointer" id="next-card" onclick="openLesson(getNext())">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="ln lc" id="next-n">4</div>
+      <div><div style="font-size:15px;font-weight:500" id="next-t">Reading motion graphs</div><div style="font-size:12px;color:var(--t2)">Tap to start</div></div>
+      <div style="margin-left:auto;color:var(--t3);font-size:20px">›</div>
+    </div>
+  </div>
+  <div class="sl">Phase 1 progress</div>
+  <div class="card cp">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+      <span style="font-size:13px;color:var(--t2)">Foundations</span>
+      <span style="font-size:13px;color:var(--blue)" id="ph1p">50%</span>
+    </div>
+    <div class="pb"><div class="pbf" id="ph1b" style="width:50%"></div></div>
+    <div style="font-size:12px;color:var(--t3);margin-top:4px" id="ph1l">3 of 6 complete</div>
+  </div>
+  <div class="sl">Storage status</div>
+  <div class="card cp"><div style="font-size:13px;color:var(--t2)" id="store-status">Checking...</div></div>
+</div>
+
+<!-- LESSONS -->
+<div class="sc" id="sc-lessons">
+  <div id="ll-view">
+    <div class="sl">Phase 1 — Foundations</div>
+    <div class="card" id="lc1"></div>
+    <div class="sl">Phase 2 — Aerodynamics</div>
+    <div class="card" id="lc2"></div>
+    <div class="sl">Phase 3 — Electronics & Build</div>
+    <div class="card" id="lc3"></div>
+  </div>
+  <div id="ld-view" style="display:none"></div>
+</div>
+
+<!-- MODELS -->
+<div class="sc" id="sc-models">
+  <div style="padding:14px">
+    <p style="font-size:13px;color:var(--t2);margin-bottom:10px;line-height:1.6">Drag to rotate. Switch modes to see different physics.</p>
+    <canvas id="mcv"></canvas>
+    <div style="font-size:11px;color:var(--t3);text-align:center;margin:3px 0 8px">Drag or swipe to rotate</div>
+    <div class="mbtns">
+      <button class="mb on" onclick="setMode('normal',this)">Glider</button>
+      <button class="mb" onclick="setMode('lift',this)">Lift</button>
+      <button class="mb" onclick="setMode('drag',this)">Drag</button>
+      <button class="mb" onclick="setMode('glide',this)">Glide path</button>
+      <button class="mb" onclick="setMode('explode',this)">Exploded</button>
+    </div>
+    <div class="co" id="mcallout"><strong>Volantex Ranger 600</strong> — your first build. 600mm EPP foam, 4-channel, built-in gyro. Drag to explore.</div>
+    <div class="sl" style="padding:14px 0 8px">Wing aerodynamics — angle of attack</div>
+    <canvas id="aoac"></canvas>
+    <div class="mbtns" id="aoabtns">
+      <button class="mb on" onclick="setAoA(0,this)">0° — low lift</button>
+      <button class="mb" onclick="setAoA(8,this)">8° — cruise</button>
+      <button class="mb" onclick="setAoA(16,this)">16° — stall</button>
+    </div>
+    <div class="co g" id="aoac2"><strong>0° AoA:</strong> Mostly symmetric airflow. Small lift. Needs speed or higher angle to fly level.</div>
+  </div>
+</div>
+
+<!-- NOTES -->
+<div class="sc" id="sc-notes">
+  <div style="padding:10px 14px 4px;font-size:13px;color:var(--t2);line-height:1.6">Your guided notes from each lesson. Complete a lesson to unlock its notes.</div>
+  <div id="notes-list"></div>
+</div>
+
+<!-- PROFILE -->
+<div class="sc" id="sc-profile">
+  <div class="hero" style="padding:16px 14px">
+    <div style="width:50px;height:50px;border-radius:50%;background:var(--bd);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px">✈</div>
+    <h1 style="font-size:18px;margin-bottom:3px">Glider Engineer</h1>
+    <p style="margin-bottom:0">Building toward autonomous fixed-wing flight</p>
+  </div>
+  <div class="sl">8-month roadmap</div>
+  <div style="padding:0 12px" id="roadmap"></div>
+  <div class="sl">Data</div>
+  <div class="card cp">
+    <div style="font-size:13px;color:var(--t2);margin-bottom:10px" id="data-summary">Loading...</div>
+    <button class="btn" style="width:100%;margin-bottom:6px" onclick="exportNotes()">Export my notes as text</button>
+    <button class="btn" style="width:100%" onclick="if(confirm('Reset everything?')){resetAll()}">Reset all progress</button>
+  </div>
+</div>
+
+</div><!-- end scrl -->
+
+<div id="nav">
+  <button class="nb on" id="nb-home" onclick="showSc('home')"><div class="ni">⌂</div>Home</button>
+  <button class="nb" id="nb-lessons" onclick="showSc('lessons')"><div class="ni">📖</div>Lessons</button>
+  <button class="nb" id="nb-models" onclick="showSc('models')"><div class="ni">✈</div>Models</button>
+  <button class="nb" id="nb-notes" onclick="showSc('notes')"><div class="ni">📝</div>Notes</button>
+  <button class="nb" id="nb-profile" onclick="showSc('profile')"><div class="ni">◉</div>Profile</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// STORAGE — robust with fallback and visible diagnostics
+// ═══════════════════════════════════════════════════════════
+const KEY = 'glider_acad_v4';
+let storageOK = false;
+
+function testStorage(){
+  try{
+    localStorage.setItem('__test__','1');
+    const ok = localStorage.getItem('__test__') === '1';
+    localStorage.removeItem('__test__');
+    storageOK = ok;
+    return ok;
+  }catch(e){ storageOK=false; return false; }
+}
+
+// Default state — lessons 0,1,2 already done
+let S = {
+  xp:0, streak:0, lastStudy:null,
+  done:[0,1,2],
+  notes:{},   // { lessonId: { q0:"answer", q1:"answer", ... } }
+  quizHistory:{} // { lessonId: [true,false,...] }
+};
+
+function saveS(){
+  if(!storageOK) return;
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ console.warn('Save failed',e); }
+}
+
+function loadS(){
+  const ok = testStorage();
+  const el = document.getElementById('store-status');
+  if(!ok){ if(el) el.textContent = '⚠ localStorage unavailable — progress won\'t persist. Try opening this file in Safari or Chrome.'; return; }
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      // Merge carefully so we don't lose defaults
+      if(Array.isArray(parsed.done)) S.done = parsed.done;
+      if(typeof parsed.xp === 'number') S.xp = parsed.xp;
+      if(typeof parsed.streak === 'number') S.streak = parsed.streak;
+      if(parsed.lastStudy) S.lastStudy = parsed.lastStudy;
+      if(parsed.notes && typeof parsed.notes === 'object') S.notes = parsed.notes;
+      if(parsed.quizHistory && typeof parsed.quizHistory === 'object') S.quizHistory = parsed.quizHistory;
+    }
+    // Always ensure 0,1,2 are in done
+    [0,1,2].forEach(i=>{ if(!S.done.includes(i)) S.done.push(i); });
+    const saved = raw ? new Date(JSON.parse(raw).lastStudy||Date.now()).toLocaleDateString() : 'never';
+    if(el) el.textContent = '✓ Progress is saving. Last saved: ' + (raw ? 'loaded successfully' : 'first visit') + '. Lessons complete: '+S.done.length;
+  }catch(e){
+    console.warn('Load failed',e);
+    if(el) el.textContent = '⚠ Could not load saved data. Starting fresh.';
+  }
+}
+
+function addXP(n){
+  S.xp += n; saveS(); renderState();
+  const el = document.createElement('div');
+  el.textContent = '+'+n+' XP';
+  el.style.cssText = 'position:fixed;top:58px;right:14px;background:var(--teal);color:#000;padding:5px 12px;border-radius:99px;font-weight:700;font-size:13px;z-index:999;pointer-events:none;animation:xpup .9s ease forwards';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 950);
+}
+
+function markStudied(){
+  const td = new Date().toDateString();
+  const yd = new Date(Date.now()-86400000).toDateString();
+  if(S.lastStudy !== td){
+    S.streak = S.lastStudy === yd ? S.streak + 1 : 1;
+    S.lastStudy = td;
+  }
+  saveS(); renderState();
+}
+
+function renderState(){
+  document.getElementById('xpp').textContent = S.xp + ' XP';
+  document.getElementById('hxp').textContent = S.xp;
+  document.getElementById('hstr').textContent = S.streak;
+  document.getElementById('hd').textContent = S.done.length;
+  const ph1 = S.done.filter(i=>i<6).length;
+  const pct = Math.round(ph1/6*100);
+  document.getElementById('ph1p').textContent = pct+'%';
+  document.getElementById('ph1b').style.width = pct+'%';
+  document.getElementById('ph1l').textContent = ph1+' of 6 complete';
+  const nxt = getNext();
+  const l = LESSONS[nxt];
+  if(l){
+    document.getElementById('next-n').textContent = nxt+1;
+    document.getElementById('next-t').textContent = l.title;
+  }
+  const ds = document.getElementById('data-summary');
+  if(ds) ds.textContent = 'Lessons complete: '+S.done.length+'/'+LESSONS.length+' · XP: '+S.xp+' · Notes saved: '+Object.keys(S.notes).length+' lessons · Storage: '+(storageOK?'✓ Working':'✗ Unavailable');
+}
+
+function resetAll(){
+  S = {xp:0,streak:0,lastStudy:null,done:[0,1,2],notes:{},quizHistory:{}};
+  saveS(); renderState(); buildLists(); buildNotes();
+  showSc('home');
+}
+
+function getNext(){
+  for(let i=0;i<LESSONS.length;i++) if(!S.done.includes(i)) return i;
+  return LESSONS.length-1;
+}
+
+function exportNotes(){
+  let txt = 'GLIDER ENGINEERING ACADEMY — MY NOTES\n';
+  txt += 'Exported: '+new Date().toLocaleDateString()+'\n\n';
+  Object.keys(S.notes).forEach(id=>{
+    const l = LESSONS[parseInt(id)];
+    if(!l) return;
+    const n = S.notes[id];
+    txt += '═══ Lesson '+(parseInt(id)+1)+': '+l.title+' ═══\n';
+    if(n && typeof n === 'object'){
+      Object.keys(n).forEach(k=>{ if(n[k]) txt += '  • '+n[k]+'\n'; });
+    }
+    txt += '\n';
+  });
+  const a = document.createElement('a');
+  a.href = 'data:text/plain;charset=utf-8,'+encodeURIComponent(txt);
+  a.download = 'GliderAcademy_Notes.txt';
+  a.click();
+}
+
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════
+let curSc = 'home';
+let navStack = [];
+
+function showSc(name, push=false){
+  if(push) navStack.push(curSc);
+  document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('sc-'+name).classList.add('on');
+  const nb = document.getElementById('nb-'+name);
+  if(nb) nb.classList.add('on');
+  curSc = name;
+  document.getElementById('scrl').scrollTop = 0;
+  document.getElementById('backbtn').style.display = navStack.length > 0 ? 'block' : 'none';
+  const titles = {home:'✈ Glider Academy',lessons:'Lessons',models:'3D Models',notes:'My Notes',profile:'Profile'};
+  const subs = {home:'Fixed-wing engineering',lessons:'All lessons',models:'Interactive models',notes:'Guided notes & answers',profile:'Roadmap & progress'};
+  document.getElementById('ht').textContent = titles[name]||name;
+  document.getElementById('hst').textContent = subs[name]||'';
+  if(name==='models') setTimeout(initModel,80);
+  if(name==='notes') buildNotes();
+  if(name==='profile'){ buildRoadmap(); renderState(); }
+}
+
+function goBack(){
+  if(navStack.length===0) return;
+  const prev = navStack.pop();
+  if(prev==='lesson-list'){
+    showLessonList();
+    document.getElementById('backbtn').style.display = navStack.length>0?'block':'none';
+  } else {
+    showSc(prev, false);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// LESSON DATA
+// ═══════════════════════════════════════════════════════════
+const LESSONS = [
+{title:'Speed, distance & time',sub:'The foundation of all motion',tag:'Physics',col:'#2f81f7',
+ bigIdea:'Speed, distance, and time are three sides of the same idea. Know any two — you always find the third.',
+ body:'Every trip a glider makes is described by three numbers: how far it went (distance), how long it took (time), and how fast it flew (speed). Change one and the others must respond. This relationship runs inside ArduPlane every time it plans a waypoint route.',
+ callouts:[
+  {t:'The core relationship',b:'Speed = distance ÷ time. Double the time at the same speed → double the distance. These always scale together.',c:''},
+  {t:'Glide ratio preview',b:'A glide ratio of 1:12 means 12 metres forward for every 1 metre of altitude lost. From 100m altitude: 1,200m of silent range with no motor.',c:'g'},
+  {t:'Mission planning',b:'ArduPlane calculates required speed from distance and time budget when planning waypoint routes. This is literally the formula it runs.',c:'a'}
+ ],
+ gnotes:[
+  {q:'Speed, distance and time are connected. If you know speed and time, you can find distance by _____ them together.',hint:'Think: what operation turns speed and time into distance?',answer:'multiplying them — distance = speed × time'},
+  {q:'If a glider travels 300 m in 20 seconds, its speed is _____ m/s.',hint:'Divide distance by time.',answer:'15 m/s — because 300 ÷ 20 = 15'},
+  {q:'Glide ratio 1:15 means for every 1 metre of altitude lost, the glider travels _____ metres forward.',hint:'The second number in the ratio.',answer:'15 metres forward — it is the forward distance per metre descended'}
+ ],
+ quizzes:[
+  {q:'A glider cruises at 15 m/s for 20 seconds. How far does it travel?',opts:['150 m','200 m','300 m','450 m'],c:2,good:'300 m — distance = speed × time = 15 × 20.',miss:'Distance = speed × time = 15 × 20 = 300 m.'},
+  {q:'Same glider must cover 450 m at 15 m/s. How long will it take?',opts:['20 s','25 s','30 s','45 s'],c:2,good:'30 s — time = distance ÷ speed = 450 ÷ 15.',miss:'Time = distance ÷ speed = 450 ÷ 15 = 30 s.'},
+  {q:'Glide ratio 1:12, altitude 60 m, motor off. Range?',opts:['60 m','360 m','720 m','1,200 m'],c:2,good:'720 m — altitude × glide ratio = 60 × 12.',miss:'Range = altitude × glide ratio = 60 × 12 = 720 m.'}
+ ]},
+
+{title:'Forces, gravity & thrust',sub:'What makes things move and stay in the air',tag:'Physics',col:'#2f81f7',
+ bigIdea:'A force is any push or pull. Four forces act on your glider simultaneously — and they must balance for stable flight.',
+ body:'Thrust pushes forward, gravity pulls down, drag pushes backward, lift pushes up. These four forces constantly compete. When they balance perfectly, the glider holds steady speed and altitude. That balance point is cruise — where you want to spend most of your flight.',
+ callouts:[
+  {t:'The four forces',b:'Thrust (motor forward) · Gravity (earth pulling down always) · Drag (air pushing back) · Lift (wing pushing up). All four act all the time.',c:''},
+  {t:'Fixed-wing advantage',b:'A quadcopter fights gravity entirely with thrust. Your glider uses its wing to carry its weight — the motor only overcomes drag. Far more efficient and longer range.',c:'g'},
+  {t:'The cruise balance',b:'Thrust = drag and lift = gravity → perfectly constant speed and altitude. Your autopilot fights to hold this balance 400 times per second.',c:'a'}
+ ],
+ gnotes:[
+  {q:'The four forces acting on a flying aircraft are: _____, _____, _____, and _____.',hint:'One pushes forward, one pulls down, one pushes backward, one pushes up.',answer:'Thrust (forward), Gravity (down), Drag (backward), Lift (up)'},
+  {q:'At cruise, thrust must _____ drag, and lift must _____ gravity.',hint:'The glider is neither speeding up nor climbing.',answer:'equal — both pairs must balance for constant speed and altitude'},
+  {q:'A fixed-wing glider is more efficient than a quadcopter because its _____ carries most of its weight, so the motor only fights _____.',hint:'Think about which force the wing provides.',answer:'wing (lift) carries weight — motor only fights drag'}
+ ],
+ quizzes:[
+  {q:'Glider cruising at constant speed and altitude. What must be true?',opts:['Thrust > drag','Lift > gravity','All four forces perfectly balanced','Thrust > gravity'],c:2,good:'All four balanced — zero net force in any direction = steady flight.',miss:'Constant speed + altitude = zero net force = all forces cancel.'},
+  {q:'You increase throttle. What happens first?',opts:['Glider climbs instantly','Thrust exceeds drag — accelerates forward','Drag disappears','Gravity decreases'],c:1,good:'Thrust > drag = net forward force = glider speeds up first.',miss:'More throttle = thrust > drag = net forward force = acceleration.'},
+  {q:'Which force does the wing generate to resist gravity?',opts:['Thrust','Drag','Lift','Momentum'],c:2,good:'Lift — upward force from airflow over the curved wing. The key advantage of fixed-wing.',miss:'Lift is the upward force from the wing\'s shape. It opposes gravity.'}
+ ]},
+
+{title:'Acceleration & the glide',sub:'Speeding up, slowing down, and the fixed-wing superpower',tag:'Physics',col:'#2f81f7',
+ bigIdea:'Acceleration is any change in speed. And when you cut the motor, your glider does something a quadcopter cannot.',
+ body:'Whenever there\'s a net force, there\'s acceleration. On takeoff, thrust dominates and the glider accelerates fast. As speed builds, drag catches up. Cut the motor entirely — the wing still generates lift. The glider descends in a long shallow glide instead of falling.',
+ callouts:[
+  {t:'Counterintuitive fact',b:'Acceleration is HIGHEST at the START of the takeoff roll when speed is lowest. As speed builds, drag catches up — net force shrinks — acceleration fades even though the glider is still speeding up.',c:''},
+  {t:'The glide superpower',b:'Motor off → no thrust. But the wing still generates lift from forward airflow. Glider descends at a shallow angle. A quadcopter with a dead motor falls straight down. Your glider lands itself.',c:'g'},
+  {t:'Glide ratio value',b:'1:12 glide ratio = 1,200 m of range from 100 m altitude with zero battery use. Motor-off glide is not a failure mode — it is a stealth and efficiency feature.',c:'a'}
+ ],
+ gnotes:[
+  {q:'Acceleration is any _____ in speed. This includes speeding up, slowing down, and _____.',hint:'What else besides going faster or slower counts as a change in motion?',answer:'change in speed — also changing direction counts as acceleration'},
+  {q:'During the takeoff roll, acceleration is highest at the _____ because drag is nearly _____ at low speed.',hint:'Think about when the net force is biggest.',answer:'start of the roll — drag is nearly zero so almost all thrust becomes net force'},
+  {q:'When the motor is cut, a fixed-wing glider _____ rather than falling, because the wing still generates _____ from airflow.',hint:'What force does the wing provide as long as air moves over it?',answer:'glides at a shallow angle — wing still generates lift from forward airflow'}
+ ],
+ quizzes:[
+  {q:'Why does a glider accelerate fastest at the start of the takeoff roll?',opts:['Motor warmest then','Drag nearly zero at low speed so net force is maximum','Gravity assists early','Gyro helps at low speed'],c:1,good:'Drag is nearly zero at low speed so almost all thrust becomes net force — max acceleration.',miss:'Low speed = tiny drag = huge net force = maximum acceleration.'},
+  {q:'Motor cuts at 150 m altitude. Glide ratio 1:10. How far does the glider travel?',opts:['150 m','1,000 m','1,500 m','10,000 m'],c:2,good:'1,500 m — 150 × 10 = 1,500.',miss:'Range = altitude × glide ratio = 150 × 10 = 1,500 m.'},
+  {q:'Drag slightly exceeds thrust at cruise. What happens?',opts:['Glider climbs','Holds speed perfectly','Decelerates slowly','Stalls immediately'],c:2,good:'Decelerates slowly — net backward force = gradual speed loss.',miss:'Drag > thrust = net backward force = gradual deceleration.'}
+ ]},
+
+{title:'Reading motion graphs',sub:'Position, speed & acceleration as pictures',tag:'Physics',col:'#2f81f7',
+ bigIdea:'A graph turns a number sequence into a picture. Once you can read motion graphs, any flight log makes instant sense.',
+ body:'Three graphs describe any flight: position vs time, speed vs time, and acceleration vs time. The slope of the position graph IS the speed. The slope of the speed graph IS the acceleration. ArduPlane logs all three on every flight.',
+ callouts:[
+  {t:'Position graph',b:'Slope upward = moving forward. Steeper slope = faster speed. Flat line = stopped or hovering. Curved line = acceleration happening.',c:''},
+  {t:'Speed graph',b:'Flat line = constant speed (cruise). Sloping up = accelerating. Sloping down = decelerating. The slope gives you acceleration at any moment.',c:'g'},
+  {t:'Why it matters',b:'When something goes wrong in a flight, the logs show it. Position spike, speed crash, acceleration anomaly — the graph makes it obvious in seconds.',c:'a'}
+ ],
+ gnotes:[
+  {q:'On a position vs time graph, a steeper upward slope means the glider is moving _____.',hint:'Slope = rise ÷ run = distance ÷ time = speed.',answer:'faster — steeper slope = more distance per second = higher speed'},
+  {q:'On a speed vs time graph, a flat horizontal line means the glider has _____ acceleration and is at _____ speed.',hint:'Flat line = no change in speed.',answer:'zero acceleration — constant speed (cruise flight)'},
+  {q:'Acceleration = change in speed ÷ time. If speed goes from 0 to 18 m/s in 6 seconds, acceleration = _____ m/s².',hint:'Divide the speed change by the time taken.',answer:'3 m/s² — because (18−0) ÷ 6 = 3'}
+ ],
+ quizzes:[
+  {q:'Flat horizontal line on a speed vs time graph means...',opts:['Accelerating','Decelerating','Constant speed','Completely stopped'],c:2,good:'Constant speed — flat line = zero slope = zero acceleration.',miss:'Flat line = no change in speed = constant speed.'},
+  {q:'On a position graph, which line represents the fastest glider?',opts:['Flat horizontal','Gentle upward slope','Steep upward slope','Downward curve'],c:2,good:'Steepest slope = most distance per second = highest speed.',miss:'Speed = slope of position graph. Steeper = faster.'},
+  {q:'Speed 0 to 18 m/s in 6 seconds. Average acceleration?',opts:['3 m/s²','6 m/s²','18 m/s²','108 m/s²'],c:0,good:'3 m/s² — acceleration = Δspeed ÷ time = 18 ÷ 6.',miss:'Acceleration = (18−0) ÷ 6 = 3 m/s².'}
+ ]},
+
+{title:'Algebra basics for engineers',sub:'Rearranging formulas with glider examples',tag:'Math',col:'#d29922',
+ bigIdea:'Algebra is rearranging. One equation — three ways to use it. This is the only algebra skill you need right now.',
+ body:'Every engineering calculation comes down to taking a formula and rearranging it for the missing piece. Distance = speed × time. Rearrange and you find speed or time just as easily. The triangle method makes this visual and fast.',
+ callouts:[
+  {t:'The triangle method',b:'Write the formula as a triangle: D on top, S and T on the bottom. Cover what you want to find — what remains shows whether to multiply or divide.',c:''},
+  {t:'Hover thrust',b:'Thrust to hover = mass × 9.8. A 0.5 kg glider needs 4.9 N. Your motor must produce at least this much at hover throttle. First real engineering calculation for your build.',c:'g'},
+  {t:'Glide range planning',b:'Range = altitude × glide ratio. Rearrange: altitude needed = range ÷ glide ratio. Need 3 km at 1:15? You need 200 m altitude minimum.',c:'a'}
+ ],
+ gnotes:[
+  {q:'D = S × T. Rearranging to find speed gives S = _____.',hint:'Divide both sides by T.',answer:'D ÷ T — divide distance by time to get speed'},
+  {q:'A 1.2 kg glider needs to hover. Required thrust = 1.2 × 9.8 = _____ N.',hint:'Just multiply the numbers.',answer:'11.76 N — this is the minimum thrust your motor must produce to lift the aircraft'},
+  {q:'You want 2 km range with a 1:10 glide ratio. You need _____ m of altitude.',hint:'Altitude = range ÷ glide ratio.',answer:'200 m — because 2000 ÷ 10 = 200'}
+ ],
+ quizzes:[
+  {q:'Rearranging D = S × T, what is the formula for speed?',opts:['S = D + T','S = D × T','S = D ÷ T','S = T ÷ D'],c:2,good:'S = D ÷ T — divide both sides by T.',miss:'D = S × T → divide both sides by T → S = D ÷ T.'},
+  {q:'0.8 kg glider hover thrust? (g = 9.8)',opts:['0.8 N','4.9 N','7.84 N','9.8 N'],c:2,good:'7.84 N — 0.8 × 9.8.',miss:'Hover thrust = mass × g = 0.8 × 9.8 = 7.84 N.'},
+  {q:'3 km range, glide ratio 1:15. Minimum altitude?',opts:['45 m','200 m','450 m','2,000 m'],c:1,good:'200 m — altitude = range ÷ glide ratio = 3000 ÷ 15.',miss:'Altitude = range ÷ glide ratio = 3000 ÷ 15 = 200 m.'}
+ ]},
+
+{title:'Glide ratio in depth',sub:'The most important number on your aircraft',tag:'Applied',col:'#3fb950',
+ bigIdea:'Glide ratio is the single most important performance number for your aircraft. It determines range, safety, and tactical usefulness.',
+ body:'Glide ratio tells you how efficient your wing is at converting altitude into forward distance. A 1:15 ratio = 15 m forward per metre of altitude lost. This determines range on a motor-off glide, ability to survive motor failure, and how useful your aircraft is for ISR missions.',
+ callouts:[
+  {t:'What determines it',b:'Wing shape, aspect ratio, and airframe cleanliness. Long thin wings with smooth airframes achieve the highest ratios. Every bump and protrusion costs you ratio.',c:''},
+  {t:'Ranger 600 baseline',b:'Achieves roughly 1:10–12. Good trainer. Your custom design should target 1:15+. A dedicated efficiency glider can reach 1:30.',c:'g'},
+  {t:'ISR mission value',b:'At 1:15 from 300 m altitude: 4.5 km of silent motor-off range. This is tactically useful. Motor-off glide is a stealth approach capability, not a failure mode.',c:'a'}
+ ],
+ gnotes:[
+  {q:'A glide ratio of 1:15 means the glider travels _____ metres forward for every _____ metre it descends.',hint:'Read the ratio directly.',answer:'15 metres forward for every 1 metre descended'},
+  {q:'Glide ratio is improved most by using _____ wings (higher aspect ratio) and a _____ airframe.',hint:'Think about what reduces drag.',answer:'longer thinner wings — and a clean smooth airframe with minimal protrusions'},
+  {q:'From 400 m altitude with a 1:12 glide ratio, a glider can travel _____ metres before landing.',hint:'Multiply altitude by the second number in the ratio.',answer:'4,800 m — because 400 × 12 = 4,800'}
+ ],
+ quizzes:[
+  {q:'Which wing design achieves a better glide ratio?',opts:['Short wide wings','Long thin wings (high aspect ratio)','Swept delta wings','Thick symmetrical airfoil'],c:1,good:'Long thin wings — high aspect ratio minimises induced drag.',miss:'High AR (long thin wings) reduces induced drag → better glide ratio.'},
+  {q:'Glider A: 1:10. Glider B: 1:20. From 200 m, how much further does B travel?',opts:['200 m','2,000 m','400 m','Same distance'],c:1,good:'2,000 m — A: 2,000 m, B: 4,000 m. Difference = 2,000 m.',miss:'A: 200×10=2,000. B: 200×20=4,000. Difference = 2,000 m.'},
+  {q:'Silent overfly of 2 km from 300 m altitude, motor off. Minimum glide ratio?',opts:['1:5','1:7','1:15','1:20'],c:1,good:'At least 1:7 — 2000÷300=6.67, round up.',miss:'Min ratio = range ÷ altitude = 2000÷300 = 6.67, so 1:7 minimum.'}
+ ]},
+
+{title:'How a wing generates lift',sub:'Airfoil shape, pressure difference, angle of attack',tag:'Aero',col:'#3fb950',
+ bigIdea:'A wing generates lift by creating lower pressure above it than below. The curved shape does the work.',
+ body:'The curved top surface forces air to travel further than the flat bottom. Faster air = lower pressure (Bernoulli). Lower pressure on top + higher pressure below = net upward force. That is lift. Tilting the wing into the airflow (increasing angle of attack) generates more lift — up to a critical point where airflow separates and lift collapses.',
+ callouts:[
+  {t:'Angle of attack (AoA)',b:'Angle between the wing chord and oncoming airflow. Increase it and lift increases. Beyond ~15–20° airflow separates from the upper surface and lift collapses. This is a stall.',c:''},
+  {t:'Stall is not about speed',b:'A stall happens at a critical ANGLE OF ATTACK, not a specific speed. You can stall at any speed if you pitch up hard enough. This is the most common beginner misconception.',c:'r'},
+  {t:'Stall recovery',b:'Immediately push nose down to reduce AoA. Airflow reattaches. Lift returns. Your Ranger 600 gyro prevents stalls in beginner mode — manual mode requires you to know this.',c:'a'}
+ ],
+ gnotes:[
+  {q:'A wing generates lift because its curved top surface makes air move _____, creating _____ pressure above the wing.',hint:'Bernoulli: faster moving air has lower pressure.',answer:'faster — creating lower pressure above; higher pressure below pushes the wing up'},
+  {q:'Angle of attack is the angle between the _____ and the direction of _____ air.',hint:'One is part of the wing, one is the wind direction.',answer:'wing chord — and the oncoming (relative) airflow'},
+  {q:'A stall happens when the angle of attack exceeds the critical angle and airflow _____ from the upper surface.',hint:'What does the airflow do when it can no longer follow the curved surface?',answer:'separates — the smooth flow detaches and lift collapses suddenly'}
+ ],
+ quizzes:[
+  {q:'What causes a wing to generate lift?',opts:['Motor pushing upward','Pressure difference between upper and lower surfaces','Weight of aircraft','Gyroscopic forces'],c:1,good:'Pressure difference — lower pressure on curved top, higher below = net upward force.',miss:'Curved top → faster airflow → lower pressure on top → pushes wing up.'},
+  {q:'What is angle of attack?',opts:['Angle to the ground','Angle between wing chord and oncoming airflow','Bank angle in a turn','Pitch of the propeller'],c:1,good:'Angle between wing chord and relative airflow. Increase it = more lift, to a point.',miss:'AoA = angle between wing chord and direction of oncoming air.'},
+  {q:'Correct immediate action when glider stalls?',opts:['Full throttle','Pull back hard','Push nose down to reduce AoA','Bank hard to one side'],c:2,good:'Push nose down — reduces AoA below stall angle — airflow reattaches — lift returns.',miss:'Stall = too high AoA. Fix = push nose down to reduce AoA.'}
+ ]},
+
+{title:'Drag — the enemy of range',sub:'Types of drag and how to minimise them',tag:'Aero',col:'#3fb950',
+ bigIdea:'At cruise your motor fights only drag. Less drag = less power needed = longer range.',
+ body:'Two main types: induced drag (unavoidable cost of generating lift, from wingtip vortices) and parasitic drag (everything else — blunt fuselage, wires, surface friction). You cannot eliminate induced drag without eliminating lift. But you can minimise parasitic drag through clean design.',
+ callouts:[
+  {t:'Induced drag',b:'Produced by wingtip vortices — spirals where high-pressure air below leaks around the wingtip. High aspect ratio wings minimise this by spacing tips further apart.',c:''},
+  {t:'Parasitic drag',b:'Form drag from blunt shapes, skin friction, interference drag at junctions. Every dangling wire, every rough joint, every protrusion adds to this total.',c:''},
+  {t:'The drag budget',b:'Your motor burns battery proportional to drag it overcomes. Cleaner airframe = less drag = smaller motor = lighter battery = longer range. Every gram and every bump compounds.',c:'a'}
+ ],
+ gnotes:[
+  {q:'Induced drag is caused by _____ at the wingtips, where high-pressure air below leaks to the _____ area above.',hint:'These are the rotating air spirals that peel off the ends of wings.',answer:'wingtip vortices — the high-pressure air leaks to the low-pressure area above'},
+  {q:'Parasitic drag includes anything creating air resistance that is NOT generating _____.',hint:'What is the only useful aerodynamic force?',answer:'lift — anything else (fuselage, wires, bumps) is just adding drag without benefit'},
+  {q:'At low speeds, _____ drag dominates. At high speeds, _____ drag dominates.',hint:'Which type depends on how fast you\'re going and how much lift you need?',answer:'induced drag dominates at low speed — parasitic drag dominates at high speed'}
+ ],
+ quizzes:[
+  {q:'Which reduces induced drag most?',opts:['Larger motor','Longer thinner wing (higher AR)','Heavier fuselage','Larger propeller'],c:1,good:'High AR — wider-spaced wingtips reduce vortex strength.',miss:'Induced drag from wingtip vortices. Longer wings space tips further apart.'},
+  {q:'A dangling servo wire creates which type of drag?',opts:['Induced','Gravity','Parasitic','Lift'],c:2,good:'Parasitic — any non-lifting protrusion creates air resistance.',miss:'Parasitic drag = anything creating resistance that isn\'t generating lift.'},
+  {q:'At low speeds, which drag type dominates?',opts:['Parasitic','Induced','Equal','Neither'],c:1,good:'Induced — low speed requires high AoA for lift, creating large vortices.',miss:'Low speed → high AoA needed → large wingtip vortices → high induced drag.'}
+ ]},
+
+{title:'Aspect ratio & wing design',sub:'Why long thin wings glide further',tag:'Aero',col:'#3fb950',
+ bigIdea:'Aspect ratio is how long and thin your wing is. Higher almost always means better glide and range.',
+ body:'Aspect ratio (AR) = wingspan ÷ chord (for rectangular wings). A 1.6m span / 0.2m chord = AR 8. A 0.8m span / 0.2m chord = AR 4. The AR 8 wing glides roughly twice as far. This is why sailplanes look like flying rulers and your design should target AR 8–12.',
+ callouts:[
+  {t:'The trade-off',b:'High AR = better glide. But long thin wings are more fragile, less agile, harder to transport. Your design must balance these. AR 8–12 is realistic for an ISR foam-board platform.',c:''},
+  {t:'Ranger 600 baseline',b:'AR ≈ 6. Good trainer, modest glide. When you design your own airframe, push toward AR 10–12. The range difference is substantial.',c:'g'},
+  {t:'Design goal',b:'AR 10 + clean airframe = roughly 1:15+ glide ratio. Combined with lightweight build and efficient motor = 30+ minute autonomous missions on one battery.',c:'a'}
+ ],
+ gnotes:[
+  {q:'Aspect ratio = wingspan ÷ _____. A wing with 1.4m span and 0.2m chord has AR = _____.',hint:'Divide span by chord width.',answer:'chord — AR = 1.4 ÷ 0.2 = 7'},
+  {q:'Higher aspect ratio means _____ induced drag because the wingtips are farther apart, creating _____ vortices.',hint:'Think about what happens to vortex strength when tips are further apart.',answer:'less induced drag — smaller weaker vortices because tips are further apart'},
+  {q:'The Ranger 600 has AR ≈ 6. Your eventual custom design should target AR _____ for better range.',hint:'The recommended range from the lesson.',answer:'8–12 — higher aspect ratio gives better glide ratio and longer range'}
+ ],
+ quizzes:[
+  {q:'Wing A: 1.6m span, 0.2m chord. Wing B: 0.8m span, 0.2m chord. Higher AR?',opts:['Wing A (AR 8)','Wing B (AR 4)','Equal','Need area'],c:0,good:'Wing A — 1.6÷0.2=8 vs 0.8÷0.2=4.',miss:'AR = span ÷ chord. A: 1.6÷0.2=8. B: 0.8÷0.2=4.'},
+  {q:'Why do sailplanes have extremely long thin wings?',opts:['Aesthetics','Maximise AR and minimise induced drag','Reduce weight','Increase top speed'],c:1,good:'High AR minimises induced drag → glide ratios of 1:40+ possible.',miss:'Long thin wings = high AR = low induced drag = excellent glide ratio.'},
+  {q:'Best modification to extend range?',opts:['Bigger motor','Bigger battery','Longer wings (higher AR)','Faster propeller'],c:2,good:'Higher AR → less drag → same battery goes further.',miss:'Higher AR → less drag → less power to cruise → more range.'}
+ ]},
+
+{title:'Brushless motors & ESCs',sub:'How your power system works',tag:'Electronics',col:'#a371f7',
+ bigIdea:'A brushless motor is controlled by an ESC that electronically switches the magnetic field to create rotation.',
+ body:'Three wires connect motor to ESC. The ESC takes a signal from the flight controller and switches power to each motor coil in sequence to create rotation. KV rating = RPM per volt. Lower KV + larger propeller = more efficient cruise thrust for your long-range glider.',
+ callouts:[
+  {t:'KV rating',b:'KV = RPM per volt. 1400KV motor on 11.1V battery = ~15,000 RPM unloaded. Lower KV pairs with larger props for efficient cruise. Higher KV for smaller props and high speed.',c:''},
+  {t:'Your Ranger 600',b:'Stock motor is 2212 1400KV with 30A ESC. Adequate for this airframe. When building your own, choose motor + prop + battery as a matched system for your target mission.',c:'g'},
+  {t:'Efficiency at cruise',b:'Fixed-wing cruise throttle is ~30–50%. A quadcopter hovers at 50–60% constantly. This is why your glider has dramatically better flight time — the motor barely works at cruise.',c:'a'}
+ ],
+ gnotes:[
+  {q:'KV rating means _____ per _____. A 1200KV motor on an 11.1V battery spins at roughly _____ RPM unloaded.',hint:'Multiply KV × voltage.',answer:'RPM per volt — 1200 × 11.1 = ~13,320 RPM unloaded'},
+  {q:'For a long-range efficient glider you want _____ KV with a _____ propeller.',hint:'Opposite of high-speed performance.',answer:'low KV with a large propeller — this combination is most efficient for cruise flight'},
+  {q:'Your ESC is rated 30A. Motor draws 35A at full throttle. This means the ESC will _____.',hint:'What happens when you exceed a component\'s rating?',answer:'overheat and may fail — always choose an ESC rated above your maximum expected current'}
+ ],
+ quizzes:[
+  {q:'What does KV mean on a brushless motor?',opts:['Kilowatts output','RPM per volt','Max current in amps','Efficiency %'],c:1,good:'RPM per volt — KV × voltage = approximate unloaded RPM.',miss:'KV = RPM per volt. KV × battery voltage = unloaded RPM.'},
+  {q:'For long-range efficient glider, which setup is better?',opts:['High KV small prop','Low KV large prop','Highest KV available','KV irrelevant'],c:1,good:'Low KV + large prop — more thrust per watt, better range.',miss:'Large slow props are more efficient. Low KV motors pair with large props.'},
+  {q:'ESC rated 30A, motor draws 35A at full throttle. What happens?',opts:['Nothing','ESC overheats and may fail','Motor slows','Battery disconnects'],c:1,good:'ESC overheats — always rate ESC above maximum expected current.',miss:'Exceeding ESC current rating causes overheating and possible failure.'}
+ ]},
+
+{title:'Servos & control surfaces',sub:'How the autopilot physically steers the aircraft',tag:'Electronics',col:'#a371f7',
+ bigIdea:'Servos are small precise motors that move to a commanded angle. They physically move your control surfaces.',
+ body:'Three surfaces steer your glider. Ailerons on the wing control roll. Elevator on the tail controls pitch (nose up/down). Rudder on the vertical tail controls yaw (nose left/right). Each is connected to a servo by a pushrod. The flight controller sends precise pulse-width signals to each servo 50 times per second.',
+ callouts:[
+  {t:'PWM signals',b:'1ms pulse = full deflection one way. 1.5ms = centre. 2ms = full deflection the other way. ArduPlane sends these 50 times per second to each servo.',c:''},
+  {t:'Aileron = roll',b:'Right aileron up + left aileron down = rolls right. The descending aileron side gets more lift and rises. This is how your glider turns.',c:'g'},
+  {t:'Adverse yaw',b:'Using ailerons causes a yaw tendency opposite to the intended turn. The rudder counteracts this and coordinates the turn. ArduPlane handles this automatically.',c:'a'}
+ ],
+ gnotes:[
+  {q:'The three control surfaces and their axes: Ailerons control _____, elevator controls _____, rudder controls _____.',hint:'Roll = side to side banking. Pitch = nose up/down. Yaw = nose left/right.',answer:'roll (banking), pitch (nose up/down), yaw (nose left/right)'},
+  {q:'A servo at centre position receives a _____ ms pulse. Full deflection one way = _____ ms, other way = _____ ms.',hint:'The range is 1ms to 2ms with centre at the midpoint.',answer:'1.5 ms for centre — 1 ms for full one way — 2 ms for full other way'},
+  {q:'To roll the aircraft left, the left aileron moves _____ and the right aileron moves _____.',hint:'The wing with more lift rises.',answer:'left aileron down (more lift, wing rises) — right aileron up (less lift, wing drops)'}
+ ],
+ quizzes:[
+  {q:'Roll left — which aileron movement?',opts:['Both up','Left up right down','Left down right up','Both down'],c:2,good:'Left down right up — left wing gets more lift and rises.',miss:'Roll left: left aileron down (more lift → rises) + right aileron up.'},
+  {q:'Stick pulled back. What does the aircraft do?',opts:['Rolls left','Nose pitches up','Yaws right','Descends faster'],c:1,good:'Nose pitches up — elevator up = tail pushed down = nose rises.',miss:'Back stick → elevator up → tail pushed down → nose rotates up.'},
+  {q:'What PWM signal centres a servo?',opts:['0 ms','1 ms','1.5 ms','2 ms'],c:2,good:'1.5 ms — midpoint between 1ms and 2ms.',miss:'Standard PWM: 1ms = full one way, 1.5ms = centre, 2ms = full other way.'}
+ ]},
+
+{title:'GPS & sensors',sub:'How the glider knows where it is',tag:'Electronics',col:'#a371f7',
+ bigIdea:'Your flight controller knows its 3D position by timing signals from satellites — and blends that with onboard motion sensors.',
+ body:'GPS times signals from at least 4 satellites. The timing difference gives distance from each satellite. Four distances = one 3D position. But GPS only updates at 10 Hz and can be blocked. The onboard IMU (accelerometers + gyroscopes) updates at 400 Hz and never loses signal — just drifts. ArduPlane blends both.',
+ callouts:[
+  {t:'Matek M10Q-5883',b:'Receives GPS + GLONASS + Galileo + BeiDou simultaneously. More constellations = more visible satellites = faster lock = better accuracy. Typical: 2–3 metres.',c:''},
+  {t:'IMU sensors',b:'Accelerometer measures linear acceleration on all 3 axes. Gyroscope measures rotation rate on all 3 axes. Together they detect every motion instantly — even indoors.',c:'g'},
+  {t:'Sensor fusion',b:'ArduPlane blends GPS (accurate but slow, 10 Hz) with IMU (fast but drifts, 400 Hz) using an Extended Kalman Filter. This is why autonomous flight is stable and responsive.',c:'a'}
+ ],
+ gnotes:[
+  {q:'GPS determines position by measuring the _____ of signals from at least _____ satellites.',hint:'It\'s about how long the signal takes to arrive.',answer:'travel time (delay) of signals from at least 4 satellites — 4 distances = 1 3D position'},
+  {q:'The IMU contains an _____ (measures linear acceleration) and a _____ (measures rotation rate).',hint:'Two different sensor types.',answer:'accelerometer and a gyroscope — together they detect all motion in 3D'},
+  {q:'GPS updates at 10 Hz, IMU at 400 Hz. ArduPlane uses _____ to blend them, giving both _____ and _____.',hint:'Think about what each sensor is good at.',answer:'an Extended Kalman Filter — giving both fast response (from IMU) and long-term accuracy (from GPS)'}
+ ],
+ quizzes:[
+  {q:'Why does M10Q use four satellite constellations?',opts:['Lower cost','More satellites = faster lock and better accuracy','Required by law','Reduces interference'],c:1,good:'More constellations = more satellites visible = faster lock, better accuracy.',miss:'More constellations = more satellites always available = faster lock, more accuracy.'},
+  {q:'GPS at 10 Hz, IMU at 400 Hz. Why use both?',opts:['Different things','GPS accurate but slow, IMU fast but drifts — fusion = best of both','Only IMU used, GPS backup','Same rate'],c:1,good:'Fusion — GPS accurate long-term, IMU fast. Together: fast AND accurate.',miss:'GPS accurate but slow. IMU fast but drifts. Fusion combines both strengths.'},
+  {q:'GPS signal lost. What does ArduPlane do?',opts:['Crashes','Dead reckoning with IMU temporarily','Lands immediately','Full manual only'],c:1,good:'Dead reckoning — uses IMU to estimate position while GPS is out, degrading over time.',miss:'GPS loss → ArduPlane uses IMU inertial navigation temporarily.'}
+ ]},
+
+{title:'ArduPlane & autonomous flight',sub:'The open-source brain of your autonomous glider',tag:'Autonomy',col:'#f85149',
+ bigIdea:'ArduPlane is free open-source autopilot software that turns your Matek F405-Wing into an autonomous aircraft brain.',
+ body:'It runs on your flight controller, reads GPS and IMU hundreds of times per second, and sends precise servo commands to keep the aircraft on the programmed path. It manages takeoff, cruise, waypoints, loiter, and landing. Mission Planner on your laptop lets you draw a route on a map and upload it.',
+ callouts:[
+  {t:'Three modes to learn in order',b:'MANUAL = you control everything. FBWA (Fly By Wire A) = autopilot levels aircraft while you control direction. AUTO = full autonomous GPS waypoint mission. Progress through these over months 5–7.',c:''},
+  {t:'Mission Planner',b:'Free software. Draw waypoints on satellite map, set altitudes and speeds, upload to aircraft. Watch live position on your laptop during the mission.',c:'g'},
+  {t:'PID tuning',b:'Three numbers (P, I, D) control how aggressively the autopilot corrects deviations. Too high = oscillation. Too low = sluggish. Autotune mode calculates optimal values automatically.',c:'a'}
+ ],
+ gnotes:[
+  {q:'The three ArduPlane flight modes in order of automation: _____, _____, then _____.',hint:'From full manual to full autonomous.',answer:'MANUAL → FBWA (stabilised) → AUTO (full autonomous GPS mission)'},
+  {q:'In FBWA mode, the autopilot handles _____ while the pilot controls _____.',hint:'What does \'fly by wire assisted\' mean?',answer:'keeping wings level and preventing stalls — pilot controls direction (heading) and throttle'},
+  {q:'PID values that are too high cause the aircraft to _____, while values too low make it _____.',hint:'Think about overcorrecting vs undercorrecting.',answer:'oscillate (wobble, weave) — too low makes it sluggish and slow to respond'}
+ ],
+ quizzes:[
+  {q:'In FBWA mode, what does ArduPlane handle automatically?',opts:['Nothing','Keeping wings level and preventing stalls while you control direction','Full autonomous navigation','Throttle only'],c:1,good:'FBWA levels aircraft and prevents extreme attitudes. You control heading and throttle.',miss:'FBWA = autopilot stabilises attitude, pilot commands direction.'},
+  {q:'5-waypoint mission, AUTO mode. What does ArduPlane do?',opts:['Flies to WP1 then waits','Follows all waypoints autonomously','Needs input at each WP','Only works with transmitter'],c:1,good:'Full autonomous sequence — navigates all waypoints in order without pilot input.',miss:'AUTO = full autonomous mission. Aircraft navigates all waypoints in sequence.'},
+  {q:'PID values too high — what symptom?',opts:['Sluggish and unresponsive','Oscillates — wobbles and weaves','Flies faster','No difference'],c:1,good:'Oscillation — overcorrects every deviation, swings past, overcorrects back.',miss:'Too-high PID = overcorrects → overshoots → overcorrects the overshoot → wobbling.'}
+ ]}
+];
+
+// ═══════════════════════════════════════════════════════════
+// BUILD LESSON LISTS
+// ═══════════════════════════════════════════════════════════
+function buildLists(){
+  ['lc1','lc2','lc3'].forEach(id=>{ const el=document.getElementById(id); if(el) el.innerHTML=''; });
+  LESSONS.forEach((l,i)=>{
+    const done = S.done.includes(i);
+    const avail = done || i===0 || S.done.includes(i-1) || (i <= Math.max(-1,...S.done)+1);
+    const nc = done?'ld':avail?'lc':'lk';
+    const bs = done?'Done':avail?'Start':'Locked';
+    const bc = done?'bd2':avail?'bc2':'bk';
+    const cid = i<6?'lc1':i<9?'lc2':'lc3';
+    const c = document.getElementById(cid); if(!c) return;
+    const d = document.createElement('div');
+    d.className = 'll';
+    if(!avail) d.style.opacity = '0.4';
+    d.innerHTML = `<div class="ln ${nc}">${i+1}</div>
+      <div class="li"><div class="lt">${l.title}</div><div class="ls">${l.sub}</div></div>
+      <div class="badge ${bc}">${bs}</div>`;
+    if(avail) d.onclick = ()=>openLesson(i);
+    c.appendChild(d);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// LESSON DETAIL
+// ═══════════════════════════════════════════════════════════
+let CL=null, CQ=0, QA=false, QS=[], QHistory=[];
+
+function openLesson(i){
+  CL = LESSONS[i]; CL._id = i;
+  CQ=0; QA=false; QS=[]; QHistory=[];
+  markStudied();
+  navStack.push('lesson-list');
+  document.getElementById('backbtn').style.display='block';
+  document.getElementById('ll-view').style.display='none';
+  const dv = document.getElementById('ld-view');
+  dv.style.display='block';
+  dv.innerHTML = buildLessonHTML(i);
+  document.getElementById('scrl').scrollTop=0;
+  document.getElementById('ht').textContent = CL.title;
+  document.getElementById('hst').textContent = CL.tag+' · Lesson '+(i+1);
+  // Load saved note answers
+  const saved = S.notes[i] || {};
+  CL.gnotes.forEach((_,qi)=>{
+    const inp = document.getElementById('gn-'+qi);
+    if(inp && saved['gn'+qi]) inp.value = saved['gn'+qi];
+  });
+  renderQuiz();
+}
+
+function showLessonList(){
+  document.getElementById('ll-view').style.display='block';
+  document.getElementById('ld-view').style.display='none';
+  document.getElementById('ht').textContent='Lessons';
+  document.getElementById('hst').textContent='All lessons';
+}
+
+function buildLessonHTML(i){
+  const l = LESSONS[i];
+  let h = `<div class="lhdr">
+    <div class="ltag" style="background:${l.col}22;color:${l.col}">${l.tag}</div>
+    <div class="ltitle">${l.title}</div>
+    <div class="ldesc">${l.sub}</div>
+  </div><div class="lc-wrap">
+    <div class="bi">${l.bigIdea}</div>
+    <div class="bt">${l.body}</div>`;
+
+  // Callouts
+  l.callouts.forEach(c=>{
+    h += `<div class="co ${c.c}"><strong>${c.t}:</strong> ${c.b}</div>`;
+  });
+
+  // Guided notes block — INSIDE lesson between callouts and quiz
+  h += `<div class="gnote-block">
+    <div class="gnote-title">📝 Guided notes — fill these in as you read</div>`;
+  l.gnotes.forEach((n,qi)=>{
+    h += `<div class="gnote-q">${n.q}</div>
+      <div class="gnote-hint">Hint: ${n.hint}</div>
+      <input type="text" class="fill-input" id="gn-${qi}" placeholder="Your answer..." oninput="saveGNote(${qi},this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <button class="reveal-btn" onclick="revealAnswer(${qi})">Show answer</button>
+        <span class="note-saved" id="ns-${qi}" style="font-size:11px;color:var(--t3);opacity:0">Saved ✓</span>
+      </div>
+      <div class="answer-text" id="ans-${qi}">${n.answer}</div>`;
+  });
+  h += `</div>`;
+
+  // Quiz section
+  h += `<div class="sl" style="padding:14px 0 7px">Quiz — ${l.quizzes.length} questions</div>
+    <div class="qdots" id="qdots">${l.quizzes.map((_,qi)=>`<div class="qd" id="qd${qi}" onclick="jumpToQ(${qi})" title="Q${qi+1}"></div>`).join('')}</div>
+    <div id="qzone" style="margin-top:2px"></div>`;
+
+  return h;
+}
+
+function saveGNote(qi, val){
+  if(!S.notes[CL._id]) S.notes[CL._id] = {};
+  S.notes[CL._id]['gn'+qi] = val;
+  saveS();
+  // Mark input as saved
+  const inp = document.getElementById('gn-'+qi);
+  if(inp) inp.classList.add('saved');
+  const ns = document.getElementById('ns-'+qi);
+  if(ns){ ns.style.opacity='1'; setTimeout(()=>ns.style.opacity='0',1500); }
+  // Update notes screen if open
+  if(document.getElementById('sc-notes').classList.contains('on')) buildNotes();
+}
+
+function revealAnswer(qi){
+  const el = document.getElementById('ans-'+qi);
+  if(el){ el.style.display = el.style.display==='block'?'none':'block'; }
+}
+
+// ═══════════════════════════════════════════════════════════
+// QUIZ with back button
+// ═══════════════════════════════════════════════════════════
+function renderQuiz(){
+  const qz = document.getElementById('qzone'); if(!qz) return;
+  if(CQ >= CL.quizzes.length){ showScore(); return; }
+  QA = false;
+  const q = CL.quizzes[CQ];
+  // Update dots
+  CL.quizzes.forEach((_,i)=>{
+    const d = document.getElementById('qd'+i);
+    if(!d) return;
+    if(QS[i]===true) d.className='qd r';
+    else if(QS[i]===false) d.className='qd w';
+    else if(i===CQ) d.className='qd curr';
+    else d.className='qd';
+  });
+  qz.innerHTML = `<div class="qblock">
+    <div class="qh">
+      <span>Q${CQ+1} / ${CL.quizzes.length}</span>
+      <span style="color:var(--teal);font-size:11px">${QS.filter(x=>x===true).length} correct so far</span>
+    </div>
+    <div class="qtxt">${q.q}</div>
+    <div class="qopts">${q.opts.map((o,i)=>`<button class="qo" id="qo${i}" onclick="ansQ(${i})">${o}</button>`).join('')}</div>
+    <div class="qfb" id="qfb"></div>
+    <div class="quiz-nav">
+      <button class="qnav-btn" ${CQ===0?'disabled':''} onclick="prevQ()">← Previous</button>
+      <span style="font-size:12px;color:var(--t3)">${CQ+1} of ${CL.quizzes.length}</span>
+      <button class="qnav-btn" id="next-q-btn" style="display:none" onclick="nextQ()">Next →</button>
+    </div>
+  </div>`;
+  // If this question was already answered, restore state
+  if(QHistory[CQ] !== undefined){
+    const prev = QHistory[CQ];
+    document.querySelectorAll('.qo').forEach(o=>o.disabled=true);
+    const qi = CL.quizzes[CQ];
+    document.getElementById('qo'+prev).classList.add(prev===qi.c?'ok':'bad');
+    if(prev!==qi.c) document.getElementById('qo'+qi.c).classList.add('show');
+    const fb=document.getElementById('qfb'); fb.classList.add('on');
+    fb.innerHTML=`<span class="${prev===qi.c?'fok':'fbad'}">${prev===qi.c?'Correct.':'Not quite.'}</span> ${prev===qi.c?qi.good:qi.miss}`;
+    document.getElementById('next-q-btn').style.display='block';
+    QA=true;
+  }
+}
+
+function ansQ(i){
+  if(QA) return; QA=true;
+  const q = CL.quizzes[CQ];
+  document.querySelectorAll('.qo').forEach(o=>o.disabled=true);
+  const ok = i===q.c;
+  document.getElementById('qo'+i).classList.add(ok?'ok':'bad');
+  if(!ok) document.getElementById('qo'+q.c).classList.add('show');
+  const fb=document.getElementById('qfb'); fb.classList.add('on');
+  fb.innerHTML=`<span class="${ok?'fok':'fbad'}">${ok?'Correct.':'Not quite.'}</span> ${ok?q.good:q.miss}`;
+  if(QS[CQ]===undefined){ QS[CQ]=ok; if(ok) addXP(10); }
+  QHistory[CQ]=i;
+  const d=document.getElementById('qd'+CQ); if(d) d.className='qd '+(ok?'r':'w');
+  document.getElementById('next-q-btn').style.display='block';
+}
+
+function nextQ(){
+  CQ++;
+  renderQuiz();
+}
+
+function prevQ(){
+  if(CQ===0) return;
+  CQ--;
+  renderQuiz();
+}
+
+function jumpToQ(i){
+  // Only allow jumping to answered questions or the next unanswered one
+  const maxReachable = Math.max(CQ, ...Object.keys(QHistory).map(Number), 0);
+  if(i <= maxReachable + 1){ CQ=i; renderQuiz(); }
+}
+
+function showScore(){
+  const right = QS.filter(x=>x===true).length, tot = CL.quizzes.length;
+  const pct = Math.round(right/tot*100);
+  let msg,sub;
+  if(right===tot){msg='Perfect score!';sub='All correct. These concepts are solid.';}
+  else if(right>=Math.ceil(tot*0.6)){msg='Good work.';sub='Core ideas are clear. Review any callouts you are unsure of.';}
+  else{msg='Review and retry.';sub='Scroll up through the lesson, then retry the quiz.';}
+  const wasNew = !S.done.includes(CL._id);
+  if(right>=Math.ceil(tot*0.6) && wasNew){
+    S.done.push(CL._id); S.quizHistory[CL._id]=QS.slice();
+    addXP(50); saveS(); renderState(); buildLists();
+  }
+  const nextId = CL._id+1;
+  document.getElementById('qzone').innerHTML=`<div class="score-s">
+    <div class="scn">${right}/${tot}</div>
+    <div class="scp">${pct}%</div>
+    <div class="scm">${msg}</div>
+    <div class="scs">${sub}</div>
+    <div class="btn-row">
+      <button class="btn" onclick="CQ=0;QA=false;QS=[];QHistory=[];renderQuiz()">← Retry quiz</button>
+      ${nextId<LESSONS.length&&right>=Math.ceil(tot*0.6)?`<button class="btn btnp" onclick="openLesson(${nextId})">Lesson ${nextId+1} →</button>`:''}
+      <button class="btn" onclick="showLessonList();showSc('lessons')">All lessons</button>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// NOTES SCREEN
+// ═══════════════════════════════════════════════════════════
+function buildNotes(){
+  const el = document.getElementById('notes-list'); if(!el) return;
+  el.innerHTML = '';
+  let any = false;
+  LESSONS.forEach((l,i)=>{
+    if(!S.done.includes(i)) return;
+    any = true;
+    const saved = S.notes[i]||{};
+    const d = document.createElement('div'); d.className='nc';
+    const KP = [
+      ['Distance = speed × time','More time at same speed = more distance','Glide ratio = metres forward ÷ metres descended'],
+      ['Four forces: Thrust, Gravity, Drag, Lift','At cruise all four forces balance exactly','Fixed-wing uses lift to carry weight — motor only fights drag'],
+      ['Acceleration = any change in speed','Highest acceleration at the START of takeoff roll','Motor off = glide, not fall — trades altitude for distance'],
+      ['Steep position graph slope = fast speed','Flat speed graph = constant speed (cruise)','Acceleration = change in speed ÷ time'],
+      ['Speed = Distance ÷ Time, rearrange for any variable','Hover thrust = mass × 9.8 N','Range = altitude × glide ratio'],
+      ['Glide ratio = forward metres ÷ metres descended','Higher aspect ratio = better glide ratio','Motor-off glide is a stealth capability, not a failure'],
+      ['Curved wing top → faster airflow → lower pressure = lift','AoA up = more lift, until the stall angle','Stall = too high AoA, not too low speed — push nose DOWN to recover'],
+      ['Induced drag from wingtip vortices','Parasitic drag from anything not generating lift','Less drag = less motor power = longer range'],
+      ['AR = wingspan ÷ chord','Higher AR = less induced drag = better glide','Target AR 8–12 for ISR fixed-wing platform'],
+      ['KV = RPM per volt','Low KV + large prop = efficient cruise thrust','Fixed-wing cruise throttle ~30–50% vs quadcopter ~55%'],
+      ['Servos controlled by PWM (1–2ms range, 1.5ms = centre)','Ailerons=roll, elevator=pitch, rudder=yaw','Adverse yaw: ailerons cause opposite yaw, corrected by rudder'],
+      ['GPS uses signal timing from 4+ satellites for 3D position','IMU = accelerometer + gyroscope, updates at 400 Hz','ArduPlane fuses GPS + IMU with Extended Kalman Filter'],
+      ['Flight modes: MANUAL → FBWA → AUTO','Mission Planner: draw waypoints on map, upload to aircraft','PID too high = oscillation, too low = sluggish response']
+    ];
+    let kpHTML = '';
+    if(KP[i]) KP[i].forEach(k=>{ kpHTML+=`<div class="ni2">📌 ${k}</div>`; });
+    // Show user's guided note answers
+    let userHTML = '';
+    l.gnotes.forEach((n,qi)=>{
+      const ans = saved['gn'+qi];
+      if(ans && ans.trim()){
+        userHTML += `<div class="ni2" style="background:rgba(210,153,34,0.05)">
+          <div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:2px">YOUR ANSWER — ${n.q.substring(0,50)}...</div>
+          <div class="user-ans">${escH(ans)}</div>
+        </div>`;
+      }
+    });
+    d.innerHTML=`<div class="nch">
+      <div><div class="nct">${l.title}</div><div class="ncl">Lesson ${i+1} · ${l.tag}</div></div>
+      <div class="badge bd2">Done</div>
+    </div>
+    <div class="ncb">${kpHTML}${userHTML||'<div class="ni2" style="color:var(--t3);font-style:italic">No guided note answers saved yet. Open the lesson to fill them in.</div>'}</div>`;
+    el.appendChild(d);
+  });
+  if(!any) el.innerHTML='<div style="padding:24px 14px;text-align:center;color:var(--t3);font-size:14px">Complete a lesson to unlock its notes here.</div>';
+}
+function escH(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ═══════════════════════════════════════════════════════════
+// ROADMAP
+// ═══════════════════════════════════════════════════════════
+function buildRoadmap(){
+  const el=document.getElementById('roadmap'); if(!el) return; el.innerHTML='';
+  const phases=[
+    ['#2f81f7','Now – Month 2','Physics foundations','Speed, forces, acceleration, graphs, algebra, glide ratio.','In progress','var(--bd)','var(--blue)'],
+    ['#3fb950','Month 2–3','Aerodynamics','Wings, lift, drag, aspect ratio, stall behaviour.','Upcoming','var(--bg3)','var(--t3)'],
+    ['#d29922','Month 3 — order Ranger 600 (~$65)','First aircraft','Manual flying begins. Theory and build now run in parallel.','Hardware','var(--ad)','var(--amber)'],
+    ['#d29922','Month 3–5','Electronics & sensors','Motors, servos, GPS, IMU, what ArduPlane does.','Upcoming','var(--bg3)','var(--t3)'],
+    ['#a371f7','Month 5 — buy autopilot kit (~$102)','Autonomy hardware','Matek F405-Wing + M10Q GPS + ELRS receiver. Install into Ranger 600.','Hardware','var(--pd)','var(--purple)'],
+    ['#a371f7','Month 5–7','ArduPlane & autonomous flight','FBWA mode, GPS calibration, first waypoint mission.','Upcoming','var(--bg3)','var(--t3)'],
+    ['#f85149','Month 7–9','Operational autonomous glider','Reliable GPS missions. Tune, iterate, document. Total ~$167.','Goal','var(--cd)','var(--coral)']
+  ];
+  phases.forEach((p,i)=>{
+    const last=i===phases.length-1;
+    const d=document.createElement('div'); d.className='rmi';
+    d.innerHTML=`${!last?'<div class="rml"></div>':''}
+      <div class="rmd" style="background:${p[0]}"></div>
+      <div><div class="rmp">${p[1]}</div><div class="rmt">${p[2]}</div>
+      <div class="rms">${p[3]}</div>
+      <div class="rmb" style="background:${p[5]};color:${p[6]}">${p[4]}</div></div>`;
+    el.appendChild(d);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// 3D GLIDER MODEL
+// ═══════════════════════════════════════════════════════════
+let mMode='normal',rX=0.3,rY=0.5,mdrag=false,mlx=0,mly=0,mcv=null,mctx=null,mW=0,mAF=null;
+
+function initModel(){
+  const cv=document.getElementById('mcv'); if(!cv||cv.dataset.init) return; cv.dataset.init='1';
+  mW=cv.offsetWidth; const mH=228;
+  cv.width=mW*(devicePixelRatio||1); cv.height=mH*(devicePixelRatio||1);
+  mctx=cv.getContext('2d'); mctx.scale(devicePixelRatio||1,devicePixelRatio||1); mcv=cv;
+  const on=(e)=>{mdrag=true;mlx=e.touches?e.touches[0].clientX:e.clientX;mly=e.touches?e.touches[0].clientY:e.clientY;};
+  const mv=(e)=>{if(!mdrag)return;const x=e.touches?e.touches[0].clientX:e.clientX,y=e.touches?e.touches[0].clientY:e.clientY;rY+=(x-mlx)*0.013;rX+=(y-mly)*0.013;mlx=x;mly=y;drawM();};
+  const off=()=>mdrag=false;
+  cv.addEventListener('mousedown',on); cv.addEventListener('mousemove',mv); cv.addEventListener('mouseup',off);
+  cv.addEventListener('touchstart',on,{passive:true}); cv.addEventListener('touchmove',mv,{passive:true}); cv.addEventListener('touchend',off);
+  if(mAF) cancelAnimationFrame(mAF);
+  (function spin(){if(!mdrag)rY+=0.006;drawM();mAF=requestAnimationFrame(spin);})();
+  initAoA();
+}
+
+function proj(x,y,z){
+  const cx=Math.cos(rX),sx=Math.sin(rX),cy=Math.cos(rY),sy=Math.sin(rY);
+  const y2=y*cx-z*sx,z2=y*sx+z*cx,x3=x*cy+z2*sy,z3=-x*sy+z2*cy;
+  const sc=220/(z3+5); return{x:mW/2+x3*sc,y:114+y2*sc};
+}
+function pl3(pts,fill,stroke){
+  const pp=pts.map(p=>proj(p[0],p[1],p[2]));
+  mctx.fillStyle=fill||'transparent';mctx.strokeStyle=stroke||'transparent';mctx.lineWidth=0.5;
+  mctx.beginPath();mctx.moveTo(pp[0].x,pp[0].y);pp.slice(1).forEach(p=>mctx.lineTo(p.x,p.y));
+  mctx.closePath();mctx.fill();if(stroke)mctx.stroke();
+}
+function ln3(x1,y1,z1,x2,y2,z2,col,w){
+  const a=proj(x1,y1,z1),b=proj(x2,y2,z2);
+  mctx.strokeStyle=col;mctx.lineWidth=w||1;mctx.beginPath();mctx.moveTo(a.x,a.y);mctx.lineTo(b.x,b.y);mctx.stroke();
+}
+function drawM(){
+  if(!mctx) return;
+  const c=mctx,m=mMode,W=mW,H=228;
+  c.clearRect(0,0,W,H); c.fillStyle='#0d1117'; c.fillRect(0,0,W,H);
+  const fo=m==='explode'?0.65:0;
+  // fuselage
+  for(let x=-2.5+fo;x<=2.5-fo;x+=0.2){
+    const t=(x+2.5)/5,r=0.08+0.065*Math.sin(Math.PI*t);
+    ln3(x-0.1,-r,0,x+0.1,-r,0,'#2f81f7',0.4); ln3(x-0.1,r,0,x+0.1,r,0,'#2f81f7',0.4);
+    ln3(x-0.1,0,-r,x+0.1,0,-r,'#2f81f7',0.4); ln3(x-0.1,0,r,x+0.1,0,r,'#2f81f7',0.4);
+  }
+  pl3([[-2.5+fo,-0.1,-0.1],[-2.5+fo,-0.1,0.1],[-2.5+fo,0.1,0.1],[-2.5+fo,0.1,-0.1]],'rgba(20,30,80,0.9)','#2f81f7');
+  // wings
+  const wy=m==='explode'?-1:0;
+  const wf=m==='lift'?'rgba(63,185,80,0.55)':m==='drag'?'rgba(248,81,73,0.35)':'rgba(50,50,120,0.85)';
+  const ws=m==='lift'?'#3fb950':m==='drag'?'#f85149':'#a371f7';
+  pl3([[-0.2,wy,0.2],[-0.2,wy,2.8],[0.2,wy,2.8],[0.2,wy,0.2]],wf,ws);
+  pl3([[-0.2,wy,-0.2],[-0.2,wy,-2.8],[0.2,wy,-2.8],[0.2,wy,-0.2]],wf,ws);
+  // tail
+  const tx=m==='explode'?-3.7:-2.9;
+  pl3([[tx,0,0.1],[tx,0,0.9],[tx+0.35,0,0.9],[tx+0.35,0,0.1]],'rgba(80,55,180,0.7)','#a371f7');
+  pl3([[tx,0,-0.1],[tx,0,-0.9],[tx+0.35,0,-0.9],[tx+0.35,0,-0.1]],'rgba(80,55,180,0.7)','#a371f7');
+  pl3([[tx,0.1,0],[tx,-0.8,0],[tx+0.4,-0.8,0],[tx+0.4,0.1,0]],'rgba(80,55,180,0.7)','#a371f7');
+  // overlays
+  if(m==='lift'){
+    const p=proj(0,0,0);
+    c.strokeStyle='#3fb950';c.lineWidth=3;c.beginPath();c.moveTo(p.x,p.y);c.lineTo(p.x,p.y-52);c.stroke();
+    c.fillStyle='#3fb950';c.beginPath();c.moveTo(p.x,p.y-52);c.lineTo(p.x-7,p.y-40);c.lineTo(p.x+7,p.y-40);c.fill();
+    c.font='bold 12px sans-serif';c.textAlign='center';c.fillText('LIFT ↑',p.x,p.y-58);
+    c.strokeStyle='#f85149';c.lineWidth=3;c.beginPath();c.moveTo(p.x,p.y+8);c.lineTo(p.x,p.y+46);c.stroke();
+    c.fillStyle='#f85149';c.beginPath();c.moveTo(p.x,p.y+48);c.lineTo(p.x-7,p.y+36);c.lineTo(p.x+7,p.y+36);c.fill();
+    c.fillText('GRAVITY ↓',p.x,p.y+60);
+  }
+  if(m==='drag'){
+    const pa=proj(2.3,0,0),pb=proj(-2.3,0,0);
+    c.strokeStyle='#2f81f7';c.lineWidth=3;c.beginPath();c.moveTo(pb.x,pb.y);c.lineTo(pa.x,pa.y);c.stroke();
+    c.fillStyle='#2f81f7';c.beginPath();c.moveTo(pa.x,pa.y);c.lineTo(pa.x-10,pa.y-5);c.lineTo(pa.x-10,pa.y+5);c.fill();
+    c.font='bold 12px sans-serif';c.textAlign='center';c.fillText('THRUST →',pa.x+24,pa.y-6);
+    c.strokeStyle='#f85149';c.lineWidth=2;c.setLineDash([5,4]);
+    c.beginPath();c.moveTo(pa.x-10,pa.y+4);c.lineTo(pa.x-52,pa.y+4);c.stroke();c.setLineDash([]);
+    c.fillStyle='#f85149';c.fillText('← DRAG',pa.x-50,pa.y+18);
+  }
+  if(m==='glide'){
+    for(let i=0;i<7;i++){
+      const p=proj(1.6-i*0.55,0.08*i,0);
+      c.fillStyle=`rgba(63,185,80,${0.9-i*0.1})`;c.beginPath();c.arc(p.x,p.y,4.5-i*0.5,0,Math.PI*2);c.fill();
+      if(i<6){const pn=proj(1.6-(i+1)*0.55,0.08*(i+1),0);c.strokeStyle='rgba(63,185,80,0.35)';c.lineWidth=1;c.setLineDash([3,3]);c.beginPath();c.moveTo(p.x,p.y);c.lineTo(pn.x,pn.y);c.stroke();c.setLineDash([]);}
+    }
+    c.fillStyle='#3fb950';c.font='bold 11px sans-serif';c.textAlign='center';c.fillText('Motor-off glide path',W/2,H-12);
+  }
+  if(m==='explode'){
+    const fp=proj(fo,0.5,0);c.fillStyle='#2f81f7';c.font='bold 11px sans-serif';c.textAlign='center';c.fillText('Fuselage',fp.x,fp.y);
+    const wp=proj(0,-1.3,1.6);c.fillStyle='#a371f7';c.fillText('Main wing',wp.x,wp.y);
+    const tp=proj(-3.7,-1.1,0);c.fillText('Tail unit',tp.x,tp.y);
+  }
+}
+
+function setMode(m,btn){
+  mMode=m;
+  document.querySelectorAll('.mb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const co={'normal':'<strong>Volantex Ranger 600</strong> — your first build. 600mm EPP foam, 4-channel, built-in gyro.','lift':'<strong>Lift vs gravity.</strong> Green = lift generated by wing. Red = gravity pulling down. At cruise these are equal.','drag':'<strong>Thrust vs drag.</strong> Blue = motor thrust. Red dashed = air resistance. At cruise these balance exactly.','glide':'<strong>Motor-off glide path.</strong> Even spacing = constant speed glide. The glider descends gradually, not falls.','explode':'<strong>Exploded view.</strong> Fuselage (blue), main wing (purple), tail unit (purple). Assembles in minutes.'};
+  document.getElementById('mcallout').innerHTML = co[m]||co['normal'];
+}
+
+// ═══════════════════════════════════════════════════════════
+// AIRFOIL
+// ═══════════════════════════════════════════════════════════
+let aoaCv,aoaCtx;
+function initAoA(){
+  aoaCv=document.getElementById('aoac'); if(!aoaCv) return;
+  aoaCv.width=aoaCv.offsetWidth; aoaCv.height=148; aoaCtx=aoaCv.getContext('2d'); drawAoA(0);
+}
+function setAoA(deg,btn){
+  document.querySelectorAll('#aoabtns .mb').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  const d={'0':'<strong>0° AoA:</strong> Mostly symmetric airflow. Small lift force. Needs speed or higher angle to fly level.','8':'<strong>8° AoA — cruise range:</strong> Strong low-pressure zone on upper surface. Efficient lift generation. Ideal cruise angle.','16':'<strong>STALL at 16°+:</strong> Airflow separates from upper surface. Lift collapses. Push nose DOWN immediately to recover.'};
+  document.getElementById('aoac2').innerHTML = d[deg]||d['0'];
+  if(!aoaCtx) initAoA();
+  drawAoA(deg);
+}
+function drawAoA(deg){
+  if(!aoaCtx) return;
+  const c=aoaCtx,W=aoaCv.width,H=148;
+  c.clearRect(0,0,W,H); c.fillStyle='#0d1117'; c.fillRect(0,0,W,H);
+  c.save(); c.translate(W/2,H/2); c.rotate(deg*Math.PI/180);
+  const len=110,th=20;
+  c.beginPath(); c.moveTo(-len/2,0);
+  for(let i=0;i<=40;i++){const t=i/40,x=-len/2+t*len,cam=th*0.28*Math.sin(Math.PI*t),tk=th*(0.11*Math.sqrt(t)*(1-t));c.lineTo(x,-cam-tk);}
+  for(let i=40;i>=0;i--){const t=i/40,x=-len/2+t*len,cam=th*0.28*Math.sin(Math.PI*t),tk=th*(0.07*Math.sqrt(t)*(1-t));c.lineTo(x,-cam+tk);}
+  c.closePath(); c.fillStyle='rgba(30,40,100,0.9)'; c.strokeStyle='#2f81f7'; c.lineWidth=1.5; c.fill(); c.stroke();
+  const stall=deg>=14;
+  for(let li=0;li<7;li++){
+    const ys=-72+li*22;
+    c.strokeStyle=stall&&ys<0?'rgba(248,81,73,0.4)':'rgba(63,185,80,0.38)';
+    c.lineWidth=1;c.setLineDash([4,4]);c.beginPath();c.moveTo(-W/2+8,ys);
+    if(stall&&ys<0){c.bezierCurveTo(-20,ys,-26,ys-30,-6,ys-48);c.bezierCurveTo(14,ys-62,36,ys-52,W/2-8,ys-16);}
+    else{const dv=ys<0?-13:4;c.bezierCurveTo(-18,ys,-27,ys+dv,0,ys+dv*0.3);c.bezierCurveTo(27,ys-dv*0.2,54,ys,W/2-8,ys);}
+    c.stroke();c.setLineDash([]);
+  }
+  if(!stall){
+    c.fillStyle='rgba(63,185,80,0.1)';c.fillRect(-50,-66,100,36);
+    c.fillStyle='#3fb950';c.font='bold 9px sans-serif';c.textAlign='center';c.fillText('LOW PRESSURE',-6,-52);
+    c.fillStyle='rgba(248,81,73,0.08)';c.fillRect(-50,34,100,30);
+    c.fillStyle='#f85149';c.fillText('HIGH PRESSURE',-6,54);
+    c.strokeStyle='#3fb950';c.lineWidth=1.5;c.beginPath();c.moveTo(-6,-28);c.lineTo(-6,-50);c.stroke();
+    c.fillStyle='#3fb950';c.beginPath();c.moveTo(-6,-53);c.lineTo(-11,-44);c.lineTo(-1,-44);c.fill();
+  }else{
+    c.fillStyle='#f85149';c.font='bold 13px sans-serif';c.textAlign='center';c.fillText('⚠ STALL',0,-44);
+    c.font='9px sans-serif';c.fillText('airflow separated — push nose down',0,-30);
+  }
+  c.restore();
+  c.fillStyle='rgba(255,255,255,0.2)';c.font='10px sans-serif';c.textAlign='right';c.fillText('AoA: '+deg+'°',W-8,13);
+}
+
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION — handle back from lesson
+// ═══════════════════════════════════════════════════════════
+function goBack(){
+  if(navStack.length===0) return;
+  const prev = navStack.pop();
+  document.getElementById('backbtn').style.display = navStack.length>0?'block':'none';
+  if(prev==='lesson-list'){
+    showLessonList();
+    document.getElementById('sc-lessons').querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));
+    document.getElementById('sc-lessons').classList.add('on');
+    document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+    document.getElementById('nb-lessons').classList.add('on');
+    curSc='lessons';
+    document.getElementById('ht').textContent='Lessons';
+    document.getElementById('hst').textContent='All lessons';
+  } else {
+    showSc(prev, false);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded',()=>{
+  loadS();
+  renderState();
+  buildLists();
+  buildNotes();
+  buildRoadmap();
+});
+</script>
+</body>
+</html>
